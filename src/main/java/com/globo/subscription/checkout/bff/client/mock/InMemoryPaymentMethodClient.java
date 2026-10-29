@@ -17,8 +17,8 @@ public class InMemoryPaymentMethodClient implements PaymentMethodClient {
     @Override
     public List<PaymentMethodItem> listAvailable() {
         return List.of(
-                new PaymentMethodItem("Cartão de crédito"),
-                new PaymentMethodItem("Cartão de débito"),
+                new PaymentMethodItem("Cartão de Crédito"),
+                new PaymentMethodItem("Cartão de Débito"),
                 new PaymentMethodItem("Pix")
         );
     }

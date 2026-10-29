@@ -59,7 +59,8 @@ public class PreCheckoutService {
                 methods.stream().map(PaymentMethodClient.PaymentMethodItem::name).toList(),
                 CartRepository.Cart.Status.PENDING,
                 total,
-                CURRENCY
+                CURRENCY,
+                null // payment: ainda não houve cobrança
         );
         cartRepository.save(cart);
 
