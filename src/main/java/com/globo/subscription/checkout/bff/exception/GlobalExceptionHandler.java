@@ -52,18 +52,19 @@ public class GlobalExceptionHandler {
         FrontendErrorResponse.Button primary;
         FrontendErrorResponse.Button secondary;
 
-        if (ex.code().equals("PAYMENT_DECLINED")) {
-            primary   = new FrontendErrorResponse.Button("Tentar novamente", "RETRY");
-            secondary = new FrontendErrorResponse.Button("Trocar meio de pagamento", "/checkout/pagamento");
-        } else if (ex.code().equals("CART_ALREADY_APPROVED")) {
-            primary   = new FrontendErrorResponse.Button("Ver comprovante", "/checkout/sucesso");
-            secondary = null;
-        } else if (ex.code().equals("CART_NOT_FOUND")) {
-            primary   = new FrontendErrorResponse.Button("Voltar ao início", "/checkout");
-            secondary = null;
-        } else {
-            primary   = new FrontendErrorResponse.Button("Tentar novamente", "RETRY");
-            secondary = new FrontendErrorResponse.Button("Trocar meio de pagamento", "/checkout/pagamento");
+        switch (ex.code()) {
+            case "CART_ALREADY_APPROVED" -> {
+                primary = new FrontendErrorResponse.Button("Ver comprovante", "/checkout/sucesso");
+                secondary = null;
+            }
+            case "CART_NOT_FOUND" -> {
+                primary = new FrontendErrorResponse.Button("Voltar ao início", "/checkout");
+                secondary = null;
+            }
+            default -> {
+                primary = new FrontendErrorResponse.Button("Tentar novamente", "RETRY");
+                secondary = new FrontendErrorResponse.Button("Trocar meio de pagamento", "/checkout/pagamento");
+            }
         }
 
         return new FrontendErrorResponse(
