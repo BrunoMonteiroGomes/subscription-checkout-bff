@@ -11,6 +11,36 @@ BFF (Backend For Frontend) do fluxo de checkout de assinaturas. Expõe dois endp
 > (`InMemoryProductClient`, `InMemoryPaymentMethodClient` e `InMemoryCartRepository`).
 > Ao reiniciar a aplicação, os carrinhos são perdidos.
 
+## 🚀 Forma mais fácil de testar (Docker, sem instalar nada)
+
+Se você quer avaliar o fluxo completo (BFF + Frontend) **sem instalar Java, Maven, Node.js ou Angular CLI**, use o repositório de avaliação:
+
+**https://github.com/BrunoMonteiroGomes/subscription-checkout-evaluation**
+
+Ele contém um `docker-compose.yml` que baixa automaticamente este BFF e o frontend diretamente do GitHub, constrói as imagens e sobe os dois containers conectados.
+
+### Como rodar
+
+```bash
+git clone https://github.com/BrunoMonteiroGomes/subscription-checkout-evaluation.git
+cd subscription-checkout-evaluation
+docker compose up --build
+```
+
+Depois de alguns minutos (o primeiro build baixa dependências Maven e npm), acesse:
+
+**http://localhost:4200**
+
+O frontend estará na porta `4200` e este BFF na porta `8080`. Para parar:
+
+```bash
+docker compose down
+```
+
+> Requisitos: apenas **Docker** instalado e em execução. Nada mais.
+
+Se preferir rodar o BFF isoladamente (por exemplo, para testar os endpoints via `curl`), siga as instruções de **Pré-requisitos** e **Como subir a API** abaixo.
+
 ## Pré-requisitos
 
 - **Java 25** (definido em `java.version` no `pom.xml`)
